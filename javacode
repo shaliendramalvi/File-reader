@@ -1,0 +1,31 @@
+import java.io.*;
+
+public class FileReaderUtility {
+    /**
+     * Reads the content of a file line by line and prints it to the console.
+     *
+     * @param filePath the path to the file to read
+     */
+    public static void readFile(String filePath) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found: " + filePath);
+        } catch (IOException e) {
+            System.err.println("An error occurred while reading the file: " + e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+        if (args.length != 1) {
+            System.out.println("Usage: java FileReaderUtility <file-path>");
+            return;
+        }
+
+        String filePath = args[0];
+        readFile(filePath);
+    }
+}
